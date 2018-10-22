@@ -5,16 +5,64 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
 
+    <nav>
+      <div class="nav-mobile">
+        <a class="ca-logo-link" href="#">
+              <img class="ca-logo"src="https://pbs.twimg.com/profile_images/872618954807590912/PUHHM6hV_400x400.jpg" alt="">
+              <span>Hive</span>
+            </a>
+        <div id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+      <ul id="nav-list">
+        <% if current_user %>
+          <li>
+            <%= link_to root_path do %>
+              <i class="fas fa-home"></i> Dashboard
+            <% end %>
+          </li>
+          <li><a href="#"><i class="fas fa-calendar-alt"></i> Events</a></li>
+        <% end %>
+        <li id="nav-logo-mid">
+          <%= link_to(root_path, class: "ca-logo-link") do %>
+            <img class="ca-logo"src="https://pbs.twimg.com/profile_images/872618954807590912/PUHHM6hV_400x400.jpg" alt="">
+            <span>Hive</span>
+          <% end %>
+        </li>
+        <% if current_user %>
+          <li>
+            <%= link_to edit_user_registration_path do %>
+              <i class="fas fa-user"></i> Profile
+            <% end %>
+          </li>
+          <li>
+            <%= link_to(destroy_user_session_path, method: :delete) do %>
+              <i class="fas fa-sign-out-alt"></i> Logout
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if notice %>
+      <p class="notice text-center alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger text-center"><%= alert %></p>
+    <% end %>
 
     <%= yield %>
+
   </body>
 </html>

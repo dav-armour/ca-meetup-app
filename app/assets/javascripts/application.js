@@ -17,3 +17,21 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
+
+$(function() {
+
+  $("#hamburger").on('click', function(){
+    console.log("Clicked")
+    $("#nav-list").toggleClass('open');
+    $("#hamburger").toggleClass('open');
+  });
+
+  $("#nav-list a").on('click', function(event) {
+    $("#nav-list").removeClass('open');
+    $("#hamburger").removeClass('open');
+  });
+
+  $("#changePass").click(function(){
+    $(".new-pass-input").attr("disabled",!this.checked);
+  });
+});

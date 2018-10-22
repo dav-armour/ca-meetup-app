@@ -3,5 +3,5 @@
 <h2>Welcome <%= current_user.first_name.capitalize %></h2>
 
 <div>
-  <%= link_to 'Logout', destroy_user_session_path, method: :delete if current_user %>
+  <p><%= current_user.inspect %></p>
 </div>
