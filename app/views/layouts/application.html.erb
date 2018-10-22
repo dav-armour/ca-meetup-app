@@ -51,12 +51,20 @@
               <i class="fas fa-sign-out-alt"></i> Logout
             <% end %>
           </li>
+        <% else %>
+          <!--
+          <li>
+            <%= link_to new_user_registration_path do %>
+              <i class="fas fa-sign-in-alt"></i> Sign Up
+            <% end %>
+          </li>
+          -->
         <% end %>
       </ul>
     </nav>
 
     <% if notice %>
-      <p class="notice text-center alert alert-success"><%= notice %></p>
+      <p class="notice text-center alert alert-success alert-dismissable"><%= notice %></p>
     <% end %>
     <% if alert %>
       <p class="alert alert-danger text-center"><%= alert %></p>

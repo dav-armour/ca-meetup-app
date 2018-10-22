@@ -154,6 +154,12 @@ nav {
   min-width: 300px;
 }
 
+// @media (min-width: 640px) {
+//   #nav-list {
+//     transition: none;
+//   }
+// }
+
 @media (min-width: 650px) {
   .nav-mobile {
     display: none;
