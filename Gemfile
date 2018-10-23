@@ -59,3 +59,5 @@ gem "devise", "~> 4.5"
 gem "bootstrap", "~> 4.1"
 
 gem "jquery-rails", "~> 4.3"
+
+gem "simple_calendar", "~> 2.3"

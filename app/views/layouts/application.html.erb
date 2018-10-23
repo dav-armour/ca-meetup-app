@@ -15,10 +15,10 @@
 
     <nav>
       <div class="nav-mobile">
-        <a class="ca-logo-link" href="#">
-              <img class="ca-logo"src="https://pbs.twimg.com/profile_images/872618954807590912/PUHHM6hV_400x400.jpg" alt="">
-              <span>Hive</span>
-            </a>
+        <%= link_to(root_path, class: "ca-logo-link" ) do %>
+          <img class="ca-logo"src="https://pbs.twimg.com/profile_images/872618954807590912/PUHHM6hV_400x400.jpg" alt="">
+          <span>Hive</span>
+        <% end %>
         <div id="hamburger">
           <span></span>
           <span></span>
@@ -63,10 +63,10 @@
       </ul>
     </nav>
 
-    <% if notice %>
+    <% if notice && !notice.empty?%>
       <p class="notice text-center alert alert-success alert-dismissable"><%= notice %></p>
     <% end %>
-    <% if alert %>
+    <% if alert && !alert.empty? %>
       <p class="alert alert-danger text-center"><%= alert %></p>
     <% end %>
 
