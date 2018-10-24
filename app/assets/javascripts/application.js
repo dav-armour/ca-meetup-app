@@ -18,8 +18,7 @@
 //= require popper
 //= require bootstrap-sprockets
 
-$(function() {
-
+var ready = function() {
   $("#hamburger").on('click', function(){
     console.log("Clicked")
     $("#nav-list").toggleClass('open');
@@ -34,4 +33,12 @@ $(function() {
   $("#changePass").click(function(){
     $(".new-pass-input").attr("disabled",!this.checked);
   });
+};
+
+// Make it work for page reloads and links
+
+$(function() {
+  ready;
 });
+
+$(document).on('turbolinks:load', ready);

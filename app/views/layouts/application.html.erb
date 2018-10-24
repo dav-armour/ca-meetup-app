@@ -15,10 +15,10 @@
 
     <nav>
       <div class="nav-mobile">
-        <a class="ca-logo-link" href="#">
-              <img class="ca-logo"src="https://pbs.twimg.com/profile_images/872618954807590912/PUHHM6hV_400x400.jpg" alt="">
-              <span>Hive</span>
-            </a>
+        <%= link_to(root_path, class: "ca-logo-link" ) do %>
+          <img class="ca-logo"src="https://pbs.twimg.com/profile_images/872618954807590912/PUHHM6hV_400x400.jpg" alt="">
+          <span>Hive</span>
+        <% end %>
         <div id="hamburger">
           <span></span>
           <span></span>
@@ -51,15 +51,33 @@
               <i class="fas fa-sign-out-alt"></i> Logout
             <% end %>
           </li>
+        <% else %>
+          <!--
+          <li>
+            <%= link_to new_user_registration_path do %>
+              <i class="fas fa-sign-in-alt"></i> Sign Up
+            <% end %>
+          </li>
+          -->
         <% end %>
       </ul>
     </nav>
 
-    <% if notice %>
-      <p class="notice text-center alert alert-success"><%= notice %></p>
+    <% if notice && !notice.empty?%>
+      <div class="notice text-center alert alert-success alert-dismissable">
+        <span><%= notice %></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     <% end %>
-    <% if alert %>
-      <p class="alert alert-danger text-center"><%= alert %></p>
+    <% if alert && !alert.empty? %>
+      <div class="alert alert-danger text-center">
+        <span><%= alert %></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     <% end %>
 
     <%= yield %>
