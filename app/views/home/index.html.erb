@@ -1,0 +1,65 @@
+<div id="next-event-card" class="card mx-auto my-3" style="max-width: 300px">
+  <div class="card-header text-center">
+    <h2>Your Next Event</h2>
+  </div>
+  <h2 class="card-title text-center mb-0 mt-3"><%= @next_event.name %></h5>
+  <div class="card-body">
+    <p class="card-text mb-1">Date: <%= @next_event.date.strftime("%d/%m/%Y") %></p>
+    <p class="card-text mb-1">Time: <%= @next_event.date.strftime("%l:%M%p") %></p>
+    <p class="card-text mb-1">Total Going: <%#= @next_event.total_going %></p>
+    <p class="card-text mb-1">Spots Left: <%#= @next_event.spots_left %></p>
+    <p class="card-text mb-1">Hive Members Going: <%#= @next_event.hive_going %></p>
+    <%= link_to "More Details", meeting_path(@next_event), class: "mb-1" %>
+    <div class="attending-buttons mt-2 d-flex justify-content-center">
+      <%= link_to root_path do %>
+        <i class="fas fa-check mx-3"></i>
+      <% end %>
+      <%= link_to root_path do %>
+        <i class="fas fa-times mx-3"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div id="last-event-card" class="card mx-auto" style="max-width: 300px">
+  <div class="card-header text-center">
+    <h2>Your Last Event</h2>
+  </div>
+  <h2 class="card-title text-center mb-0 mt-3"><%= @last_event.name %></h5>
+  <div class="card-body">
+    <p class="card-text mb-1">Date: <%= @last_event.date.strftime("%d/%m/%Y") %></p>
+    <h4>Please Rate:</h4>
+    <% @ratings.each do |k,v| %>
+      <p class="card-text mb-1 d-flex justify-content-between" style="max-width: 170px">
+        <span class="rating-label"><%= k.to_s.capitalize %>: </span>
+        <span class="stars-group">
+          <% v.times do %>
+            <%= link_to root_path, class: "rating-star-link" do %>
+              <i class="fas fa-star"></i>
+            <% end %>
+          <% end %>
+          <% (5-v).times do %>
+            <%= link_to root_path, class: "rating-star-link" do %>
+              <i class="far fa-star"></i>
+            <% end %>
+          <% end %>
+        </span>
+      </p>
+    <% end %>
+    <%= link_to "More Details", meeting_path(@last_event), class: "mb-1" %>
+    <div class="add-buttons mt-2 d-flex justify-content-around">
+      <%= link_to "Add Photo", root_path, class: "btn btn-primary" %>
+      <%= link_to "Add Comment", root_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
+
+<%= month_calendar(attribute: :date, events: @events) do |date, events| %>
+  <%= date.day %>
+
+  <% events.each do |event| %>
+    <div class="<%= event.html_class %>">
+      <%= event.name %>
+    </div>
+  <% end %>
+<% end %>

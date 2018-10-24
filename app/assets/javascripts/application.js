@@ -14,3 +14,31 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+
+var ready = function() {
+  $("#hamburger").on('click', function(){
+    console.log("Clicked")
+    $("#nav-list").toggleClass('open');
+    $("#hamburger").toggleClass('open');
+  });
+
+  $("#nav-list a").on('click', function(event) {
+    $("#nav-list").removeClass('open');
+    $("#hamburger").removeClass('open');
+  });
+
+  $("#changePass").click(function(){
+    $(".new-pass-input").attr("disabled",!this.checked);
+  });
+};
+
+// Make it work for page reloads and links
+
+$(function() {
+  ready;
+});
+
+$(document).on('turbolinks:load', ready);

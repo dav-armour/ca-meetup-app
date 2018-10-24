@@ -1,0 +1,158 @@
+
+nav {
+  background-color: #fbfbfb;
+  padding: 10px 10px;
+  border-bottom: 1px solid $dblue;
+  min-height: 66px;
+}
+
+#hamburger {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  cursor: pointer;
+
+  &:hover span {
+    background-color: $lblue;
+  }
+
+  span {
+    display: block;
+    width: 33px;
+    height: 4px;
+    margin-bottom: 5px;
+    background: $dblue;
+    border-radius: 3px;
+    z-index: 99;
+
+    transform-origin: 4px;
+
+    transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+    opacity 0.55s ease;
+
+    &:nth-of-type(1) {
+      transform-origin: 0% 0%;
+      margin-top: 5px;
+    }
+
+    &:nth-of-type(3) {
+      transform-origin: 0% 100%;
+    }
+  }
+
+  &.open {
+    span:nth-of-type(1) {
+      transform: rotate(45deg) translate(-4px, -1px);
+    }
+
+    span:nth-of-type(2) {
+      opacity: 0;
+      transform: scale(0.2, 0.2);
+    }
+
+    span:nth-of-type(3) {
+      transform: rotate(-45deg) translate(-2px, -1px);
+    }
+  }
+}
+
+#nav-list {
+  display: flex;
+  margin-top: -200px;
+  margin-bottom: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  transition: all 0.3s ease-in;
+
+  &.open {
+    margin-top: 0;
+  }
+
+  li {
+    display: inline-block;
+    list-style: none;
+    margin: 5px 10px;
+
+    a {
+      text-decoration: none;
+      color: #133A5C;
+      font-size: 1.2em;
+
+      &:hover {
+        color: $lblue;
+      }
+    }
+  }
+}
+
+.ca-logo {
+  height: 45px;
+  width: 45px;
+}
+
+.ca-logo-link {
+  text-decoration: none;
+  line-height: 45px;
+  vertical-align: center;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  span {
+    font-size: 40px;
+    font-family: sans-serif;
+    color: #133A5C;
+  }
+}
+
+#nav-logo-mid {
+  display: none !important;
+}
+
+.nav-mobile {
+  z-index: 9999;
+}
+
+.min-width-300 {
+  min-width: 300px;
+}
+
+// @media (min-width: 640px) {
+//   #nav-list {
+//     transition: none;
+//   }
+// }
+
+@media (min-width: 650px) {
+  .nav-mobile {
+    display: none;
+  }
+
+  #nav-logo-mid {
+    display: inline !important;
+  }
+
+  #nav-list {
+    display: flex;
+    flex-direction: row !important;
+    margin: 0;
+    transition: none;
+
+    li {
+
+      &:nth-of-type(3) {
+        margin: 0 auto;
+      }
+
+      &:nth-of-type(4) {
+        margin-left: 48.4px;
+      }
+    }
+  }
+}
