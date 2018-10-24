@@ -2,22 +2,25 @@
 
 <h2>Welcome <%= current_user.first_name.capitalize %></h2>
 
-<div>
-  <p><%= current_user.inspect %></p>
+<div class="card mx-1" style="width: 270px;">
+  <h2 class="card-title text-center"><%= @next_event.name %></h5>
+  <div class="card-body">
+    <p class="card-text mb-1">Date: <%= @next_event.date.strftime("%d/%M/%Y") %></p>
+    <p class="card-text mb-1">Time: <%= @next_event.date.strftime("%H:%M") %></p>
+    <p class="card-text mb-1">Total Going: <%#= @next_event.total_going %></p>
+    <p class="card-text mb-1">Spots Left: <%#= @next_event.spots_left %></p>
+    <p class="card-text mb-1">Hive Members Going: <%#= @next_event.hive_going %></p>
+    <%= link_to "More Details", meeting_path(@next_event) %>
+  </div>
 </div>
 
-<%#= month_calendar do |date| %>
-  <%#= date.day %>
-<%# end %>
 
-<!--
-<%#= month_calendar events: @events do |date, events| %>
-  <%#= date %>
+<%= month_calendar(attribute: :date, events: @events) do |date, events| %>
+  <%= date.day %>
 
-  <%# events.each do |event| %>
-    <div>
-      <%#= event.name %>
+  <% events.each do |event| %>
+    <div class="<%= event.html_class %>">
+      <%= event.name %>
     </div>
-  <%# end %>
-<%# end %>
--->
+  <% end %>
+<% end %>
