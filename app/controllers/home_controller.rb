@@ -7,6 +7,8 @@ class HomeController < ApplicationController
     #            {name: "test3", start_time: Date.parse('2018-10-25')},
     #            {name: "test4", start_time: Date.parse('2018-10-2')}]
     @events = Event.all
-    @next_event = @events.first
+    @next_event = @events.last
+    @last_event = @events.first
+    @ratings = { food: 1, drinks: 2, talks: 3, vibe: 4 }
   end
 end
