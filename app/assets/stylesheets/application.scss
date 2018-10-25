@@ -44,10 +44,42 @@ a {
   }
 }
 
-.rating-star-link:hover {
-  color: red;
-  text-decoration: none;
+$starColour: #16a085;
+$starHoverColour: #1abc9c;
+
+@import url('https://use.fontawesome.com/releases/v5.0.9/css/all.css');
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  text-align: center;
 }
+
+.rating > a {
+  display: inline-block;
+  position: relative;
+  width: 1em;
+  font-family: sans-serif;
+}
+
+.home-index {
+  .rating > a:hover,
+  .rating > a:hover ~ a {
+    color: transparent;
+  }
+  .rating > a:hover:before,
+  .rating > a:hover ~ a:before {
+    content: "\2605";
+    position: absolute;
+    left: 0;
+    color: $lblue;
+  }
+}
+
+// .rating-star-link:hover {
+//   color: red;
+//   text-decoration: none;
+// }
 
 .attending-buttons {
   a:nth-of-type(1):hover {
@@ -67,4 +99,19 @@ a {
     height: 35px;
     width: 35px;
   }
+}
+
+
+body.home-index {
+  .flex-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    // flex-direction: column;
+  }
+}
+
+@media (min-width: 650px) {
+
 }

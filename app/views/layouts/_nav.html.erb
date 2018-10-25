@@ -1,0 +1,49 @@
+<nav>
+  <div class="nav-mobile">
+    <%= link_to(root_path, class: "ca-logo-link" ) do %>
+      <img class="ca-logo"src="https://pbs.twimg.com/profile_images/872618954807590912/PUHHM6hV_400x400.jpg" alt="">
+      <span>Hive</span>
+    <% end %>
+    <div id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <ul id="nav-list">
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to root_path do %>
+          <i class="fas fa-home"></i> Dashboard
+        <% end %>
+      </li>
+      <li><a href="#"><i class="fas fa-calendar-alt"></i> Events</a></li>
+    <% end %>
+    <li id="nav-logo-mid">
+      <%= link_to(root_path, class: "ca-logo-link") do %>
+        <img class="ca-logo"src="https://pbs.twimg.com/profile_images/872618954807590912/PUHHM6hV_400x400.jpg" alt="">
+        <span>Hive</span>
+      <% end %>
+    </li>
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to edit_user_registration_path do %>
+          <i class="fas fa-user"></i> Profile
+        <% end %>
+      </li>
+      <li>
+        <%= link_to(destroy_user_session_path, method: :delete) do %>
+          <i class="fas fa-sign-out-alt"></i> Logout
+        <% end %>
+      </li>
+    <% else %>
+      <!--
+      <li>
+        <%= link_to new_user_registration_path do %>
+          <i class="fas fa-sign-in-alt"></i> Sign Up
+        <% end %>
+      </li>
+      -->
+    <% end %>
+  </ul>
+</nav>
