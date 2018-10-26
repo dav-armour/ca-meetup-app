@@ -13,7 +13,7 @@
 
   <body class="<%= "#{controller_name}-#{action_name}" %>">
 
-    <%= render 'layouts/nav' %>
+    <%= render 'pages/nav' %>
 
     <% if notice && !notice.empty? %>
       <div class="notice text-center alert alert-success alert-dismissable">
@@ -31,8 +31,8 @@
         </button>
       </div>
     <% end %>
-
-    <%= yield %>
-
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

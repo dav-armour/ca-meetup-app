@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!
   before_action :config_devise_params, if: :devise_controller?
 
   def config_devise_params

@@ -2,13 +2,14 @@
   <p class="card-text mb-1 d-flex justify-content-between" style="max-width: 170px">
     <span class="rating-label"><%= k.to_s.capitalize %>: </span>
     <span class="rating">
+      <% v = 0 if v.nil? %>
       <% (5-v).times do |i| %>
-        <%= link_to root_path, class: "rating-star-link", "data-rating": (5-i).to_s do %>
+        <%= link_to event_ratings_path(event.id, rating: { k => (5-i)} ), method: :post, class: "rating-star-link", "data-rating": (5-i).to_s do %>
           ☆
         <% end %>
       <% end %>
       <% v.times do |i| %>
-        <%= link_to root_path, class: "rating-star-link", "data-rating": (i+1).to_s do %>
+        <%= link_to event_ratings_path(event.id, rating: { k => (v-i)} ), method: :post, class: "rating-star-link", "data-rating": (v-i).to_s do %>
           ★
         <% end %>
       <% end %>

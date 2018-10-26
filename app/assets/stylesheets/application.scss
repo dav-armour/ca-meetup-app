@@ -53,33 +53,51 @@ $starHoverColour: #1abc9c;
   unicode-bidi: bidi-override;
   direction: rtl;
   text-align: center;
-}
 
-.rating > a {
-  display: inline-block;
-  position: relative;
-  width: 1em;
-  font-family: sans-serif;
-}
+  > a {
+    display: inline-block;
+    position: relative;
+    width: 1em;
+    font-family: sans-serif;
 
-.home-index {
-  .rating > a:hover,
-  .rating > a:hover ~ a {
-    color: transparent;
-  }
-  .rating > a:hover:before,
-  .rating > a:hover ~ a:before {
-    content: "\2605";
-    position: absolute;
-    left: 0;
-    color: $lblue;
+    &:hover,
+    &:hover ~ a {
+      color: transparent;
+
+      &:before {
+        content: "\2605";
+        position: absolute;
+        left: 0;
+        color: $lblue;
+      }
+    }
   }
 }
 
-// .rating-star-link:hover {
-//   color: red;
-//   text-decoration: none;
-// }
+.pages-home {
+  .flex-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 10px 0;
+
+    > .card {
+      height: 410px;
+      margin: 10px 0;
+    }
+  }
+}
+
+@media (min-width: 650px) {
+  .pages-home {
+    .flex-wrapper {
+      height: calc(100vh - 66px);
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
+}
 
 .attending-buttons {
   a:nth-of-type(1):hover {
@@ -99,19 +117,4 @@ $starHoverColour: #1abc9c;
     height: 35px;
     width: 35px;
   }
-}
-
-
-body.home-index {
-  .flex-wrapper {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    // flex-direction: column;
-  }
-}
-
-@media (min-width: 650px) {
-
 }

@@ -1,4 +1,4 @@
-<div class="card my-2 mx-2" style="min-width: 300px">
+<div class="card mx-2" style="min-width: 300px">
   <% if header %>
     <div class="card-header text-center">
       <h2><%= header %></h2>
@@ -11,7 +11,7 @@
     <p class="card-text mb-1">Total Going: <%#= event.total_going %></p>
     <p class="card-text mb-1">Spots Left: <%#= event.spots_left %></p>
     <p class="card-text mb-1">Hive Members Going: <%#= event.hive_going %></p>
-    <%= link_to "More Details", meeting_path(event), class: "mb-1" %>
+    <%= link_to "More Details", event_path(event), class: "mb-1" %>
     <div class="attending-buttons mt-2 d-flex justify-content-center">
       <%= link_to root_path do %>
         <i class="fas fa-check mx-3"></i>
