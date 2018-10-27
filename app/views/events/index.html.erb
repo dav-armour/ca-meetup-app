@@ -1,6 +1,28 @@
 <h1>Events</h1>
 
-<%= render 'event_card', event: @next_event, header: "Your Next Event"%>
+<div class="row">
+  <div class="col-lg-4">
+    <%= render 'pages/event_card', event: @next_event, header: "Your Next Event"%>
+  </div>
+
+  <div class="col-lg-8">
+    <%= month_calendar(attribute: :date, events: @events) do |date, events| %>
+      <%= date.day %>
+
+      <% events.each do |event| %>
+        <div class="<%= event.html_class %>">
+          <%= event.name %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+
+</div>
+
+
+
+
 
 <table>
   <thead>
