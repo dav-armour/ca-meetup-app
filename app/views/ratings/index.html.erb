@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Ratings</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Food</th>
@@ -11,7 +9,7 @@
       <th>Vibe</th>
       <th>Event</th>
       <th>User</th>
-      <th colspan="3"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -22,11 +20,12 @@
         <td><%= rating.drinks %></td>
         <td><%= rating.talks %></td>
         <td><%= rating.vibe %></td>
-        <td><%= rating.event %></td>
-        <td><%= rating.user %></td>
-        <td><%= link_to 'Show', event_rating_path(@event, rating) %></td>
-        <td><%#= link_to 'Edit', edit_rating_path(rating) %></td>
-        <td><%#= link_to 'Destroy', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= rating.user.name %></td>
+        <td>
+          <%= link_to 'Delete', event_rating_path(rating.event.id, rating.id),
+              method: :delete, class: 'btn btn-sm btn-danger',
+              data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
