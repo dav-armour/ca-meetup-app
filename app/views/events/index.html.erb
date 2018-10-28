@@ -1,4 +1,4 @@
-<h1>Events</h1>
+<h1 class="text-center">Events</h1>
 
 <div class="row">
   <div class="col-lg-4">
@@ -11,18 +11,13 @@
 
       <% events.each do |event| %>
         <div class="<%= event.html_class %>">
-          <%= event.name %>
+          <%= link_to event.name, event %>
         </div>
       <% end %>
     <% end %>
   </div>
 
-
 </div>
-
-
-
-
 
 <table>
   <thead>

@@ -1,0 +1,49 @@
+<h1>Add New Group</h1>
+<br>
+<h2>Search</h2>
+
+<%= form_with url: groups_search_path, local: true do |form| %>
+  <div class="group-search-form">
+    <%= select_tag "location", options_for_select(Group.locations.keys.map {|loc| loc.titleize }), prompt: "Select Location...", class: "form-control mb-2 mr-2" %>
+    <%= form.text_field :search_text, class: "form-control mb-2 mr-2", placeholder: "Search terms..." %>
+    <%= form.submit 'Search', class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<hr />
+
+<% if @results %>
+  <h2>Results</h2>
+
+  <table id="results-table" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</td>
+        <th class="group-desc">Description</td>
+        <th>Meetup Link</td>
+        <th>Add Group</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @results.each_with_index do |result, index| %>
+        <tr>
+          <%= form_with model: @group, local: true do |form| %>
+            <%= form.hidden_field :name, value: result['name'] %>
+            <%= form.hidden_field :urlname, value: result['urlname'] %>
+            <%= form.hidden_field :description, value: result['description'] %>
+            <%= form.hidden_field :location, value: result['city'] %>
+            <%= form.hidden_field :link, value: result['link'] %>
+            <td class="align-middle"><%= result['name'] %></td>
+            <td class="group-desc"><%= strip_tags(result['description']).truncate(45, separator: ' ') %></td>
+            <td class="align-middle"><%= link_to "Meetup Link", result['link'] %></td>
+            <td class="align-middle"><%= form.submit 'Add', class: "btn btn-sm py-2 px-4 btn-primary" %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%#= render 'form', group: @group %>
+
+<%= link_to 'Back', groups_path %>

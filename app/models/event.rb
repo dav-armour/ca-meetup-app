@@ -1,3 +1,4 @@
 class Event < ApplicationRecord
-  has_many :ratings
+  belongs_to :group
+  has_many :ratings, dependent: :destroy
 end

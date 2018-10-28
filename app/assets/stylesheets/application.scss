@@ -118,3 +118,43 @@ $starHoverColour: #1abc9c;
     width: 35px;
   }
 }
+
+@media (min-width: 650px) {
+  .group-search-form {
+    display: flex;
+
+    input[type="submit"] {
+      height: 38px;
+    }
+
+    select {
+      max-width: 160px;
+    }
+  }
+}
+
+#results-table > thead > tr {
+  td:nth-of-type(3) {
+    width: 130px;
+  }
+
+  td:nth-of-type(4) {
+    width: 130px;
+  }
+}
+
+table {
+  .group-desc,
+  .meetup-link {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  table {
+    .group-desc,
+    .meetup-link {
+      display: table-cell;
+    }
+  }
+}

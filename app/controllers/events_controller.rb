@@ -13,7 +13,6 @@ class EventsController < ApplicationController
   def show
   end
 
-  # GET /events/new
   def new
     @event = Event.new
   end
@@ -27,28 +26,20 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
-      else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.save
+      redirect_to @event, notice: 'event was successfully created.'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'event was successfully updated.' }
-        format.json { render :show, status: :ok, location: @event }
-      else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+    if @event.update(event_params)
+      format.html { redirect_to @event, notice: 'event was successfully updated.' }
+    else
+      format.html { render :edit }
     end
   end
 
