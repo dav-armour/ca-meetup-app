@@ -44,9 +44,59 @@ a {
   }
 }
 
-.rating-star-link:hover {
-  color: red;
-  text-decoration: none;
+$starColour: #16a085;
+$starHoverColour: #1abc9c;
+
+@import url('https://use.fontawesome.com/releases/v5.0.9/css/all.css');
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  text-align: center;
+
+  > a {
+    display: inline-block;
+    position: relative;
+    width: 1em;
+    font-family: sans-serif;
+
+    &:hover,
+    &:hover ~ a {
+      color: transparent;
+
+      &:before {
+        content: "\2605";
+        position: absolute;
+        left: 0;
+        color: $lblue;
+      }
+    }
+  }
+}
+
+.pages-home {
+  .flex-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 10px 0;
+
+    > .card {
+      height: 410px;
+      margin: 10px 0;
+    }
+  }
+}
+
+@media (min-width: 650px) {
+  .pages-home {
+    .flex-wrapper {
+      height: calc(100vh - 66px);
+      justify-content: space-around;
+      align-items: center;
+    }
+  }
 }
 
 .attending-buttons {
@@ -66,5 +116,45 @@ a {
     font-size: 1.5em;
     height: 35px;
     width: 35px;
+  }
+}
+
+@media (min-width: 650px) {
+  .group-search-form {
+    display: flex;
+
+    input[type="submit"] {
+      height: 38px;
+    }
+
+    select {
+      max-width: 160px;
+    }
+  }
+}
+
+#results-table > thead > tr {
+  td:nth-of-type(3) {
+    width: 130px;
+  }
+
+  td:nth-of-type(4) {
+    width: 130px;
+  }
+}
+
+table {
+  .group-desc,
+  .meetup-link {
+    display: none;
+  }
+}
+
+@media (min-width: 992px) {
+  table {
+    .group-desc,
+    .meetup-link {
+      display: table-cell;
+    }
   }
 }

@@ -1,0 +1,32 @@
+<h1>Groups</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Location</th>
+      <th class="d-none d-md-table-cell">Description</th>
+      <th class="d-none d-lg-table-cell">Meetup Link</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @groups.each do |group| %>
+      <tr>
+        <td class="align-middle"><%= group.name %></td>
+        <td class="align-middle"><%= group.location %></td>
+        <td class="d-none d-md-table-cell align-middle"><%= strip_tags(group.description).truncate(45, separator: ' ') %></td>
+        <td class="d-none d-lg-table-cell align-middle"><%= link_to "Meetup Link", group.link %></td>
+        <td class="align-middle">
+          <%= link_to 'Show', group, class: "btn btn-sm btn-primary d-inline-block my-1" %>
+          <%= link_to 'Destroy', group, class: "btn btn-sm btn-danger d-inline-block my-1", method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Group', new_group_path %>

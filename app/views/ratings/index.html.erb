@@ -1,0 +1,36 @@
+<h1>Ratings</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Food</th>
+      <th>Drinks</th>
+      <th>Talks</th>
+      <th>Vibe</th>
+      <th>Event</th>
+      <th>User</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ratings.each do |rating| %>
+      <tr>
+        <td><%= rating.food %></td>
+        <td><%= rating.drinks %></td>
+        <td><%= rating.talks %></td>
+        <td><%= rating.vibe %></td>
+        <td><%= rating.user.name %></td>
+        <td>
+          <%= link_to 'Delete', event_rating_path(rating.event.id, rating.id),
+              method: :delete, class: 'btn btn-sm btn-danger',
+              data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rating', new_event_rating_path %>
