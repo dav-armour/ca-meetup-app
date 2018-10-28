@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :ratings
+  has_many :event_users
+  has_many :events, through: :event_users
 
   def first_name
     self.name.split.first
