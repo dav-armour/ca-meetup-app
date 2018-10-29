@@ -1,6 +1,17 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
+  def set_attendance
+    p params
+    byebug
+    @event_user = EventUser.new
+    @event_user.event_id = params['event_id']
+    @event_user.user_id = current_user.id
+    @event_user.attending = params['attending']
+    @event_user.save
+    redirect_to root_path
+  end
+
   # GET /events
   # GET /events.json
   def index
