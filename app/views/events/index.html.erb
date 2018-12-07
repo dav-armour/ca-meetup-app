@@ -1,8 +1,9 @@
 <h1 class="text-center">Events</h1>
 
 <div class="row">
-  <div class="col-lg-4">
-    <%= render 'pages/event_card', event: @next_event, header: "Your Next Event"%>
+  <div class="col-lg-4 my-auto">
+
+    <%= render 'shared/event_card', event: @selected_event, header: "Selected Event", attending: @attending %>
   </div>
 
   <div class="col-lg-8">

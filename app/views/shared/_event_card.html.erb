@@ -1,0 +1,25 @@
+<div class="card mx-2" style="min-width: 300px">
+  <% if header %>
+    <div class="card-header text-center">
+      <h2><%= header %></h2>
+    </div>
+  <% end %>
+  <% if event %>
+    <h2 class="card-title text-center mb-0 mt-3"><%= event.name %></h5>
+    <div class="card-body">
+      <p class="card-text mb-1">Date: <%= event.date.strftime("%d/%m/%Y") %></p>
+      <p class="card-text mb-1">Time: <%= event.date.strftime("%l:%M%p") %></p>
+      <p class="card-text mb-1">Total Going: <%#= event.total_going %></p>
+      <p class="card-text mb-1">Spots Left: <%#= event.spots_left %></p>
+      <p class="card-text mb-1">Hive Members Going: <%#= event.hive_going %></p>
+      <%= link_to "More Details", event_path(event), class: "mb-1" %>
+      <%= render 'shared/attending_buttons', event: event, attending: attending %>
+    </div>
+  <% else %>
+    <h2 class="card-title text-center mb-0 mt-3">No Event</h5>
+    <div class="card-body">
+      <p class="card-text mb-1">You aren't signed up to any events.</p>
+      <p class="card-text mb-1">Please choose an event from the calendar</p>
+    </div>
+  <% end %>
+</div>

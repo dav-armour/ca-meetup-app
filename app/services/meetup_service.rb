@@ -23,6 +23,15 @@ class MeetupService
       end
     end
 
+    def event(urlname, meetup_id)
+      data = get("/#{urlname}/events/#{meetup_id}")
+      if data.code.to_i == 200
+        data.parsed_response
+      else
+        raise "Error fetching data from Meetup API"
+      end
+    end
+
     def groups(search_text, location)
       options = {
         query: {

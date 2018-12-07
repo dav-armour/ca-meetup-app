@@ -6,7 +6,8 @@ class User < ApplicationRecord
 
   has_many :ratings
   has_many :event_users
-  has_many :events, through: :event_users
+  has_many :events, -> { where event_users: { attending: 'going' } }, through: :event_users
+  # has_many :events, through: :event_users, -> { where(groups: {active: true}) }
 
   def first_name
     self.name.split.first

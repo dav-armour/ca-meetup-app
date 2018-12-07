@@ -2,26 +2,38 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
 
   def set_attendance
-    p params
-    byebug
-    @event_user = EventUser.new
-    @event_user.event_id = params['event_id']
-    @event_user.user_id = current_user.id
+    # Check if record already exists
+    @event_user = EventUser.find_by(user_id: current_user.id, event_id: params['event_id'])
+    unless @event_user
+      @event_user = EventUser.new
+      @event_user.event_id = params['event_id']
+      @event_user.user_id = current_user.id
+    end
     @event_user.attending = params['attending']
     @event_user.save
-    redirect_to root_path
+    redirect_back(fallback_location: event_path(id: params['event_id']))
   end
 
   # GET /events
   # GET /events.json
   def index
     @events = Event.all
-    @next_event = Event.last
+    if params['event_id']
+      @selected_event = Event.find_by(id: params['event_id'])
+    end
+    @selected_event ||= Event.last
+    event_user = EventUser.find_by(user_id: current_user.id, event_id: @selected_event.id)
+    @attending = event_user ? event_user.attending : nil
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    # @event_details = MeetupService.event(@event.group.urlname, @event.meetup_id)
+    @event_details = {}
+    @ratings = { food: 0, drinks: 0, talks: 0, vibe: 0 }
+    event_user = EventUser.find_by(user_id: current_user.id, event_id: @event.id)
+    @attending = event_user ? event_user.attending : nil
   end
 
   def new

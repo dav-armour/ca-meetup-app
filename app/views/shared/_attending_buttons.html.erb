@@ -1,0 +1,16 @@
+<div class="attending-buttons mt-2 d-flex justify-content-center">
+  <%= link_to event_set_attendance_path(event.id, attending: 'going' ), method: :post do %>
+    <% if attending == 'going' %>
+      <i class="text-success fas fa-check mx-3"></i>
+    <% else %>
+      <i class="fas fa-check mx-3"></i>
+    <% end %>
+  <% end %>
+  <%= link_to event_set_attendance_path(event.id, attending: 'not_going' ), method: :post do %>
+    <% if attending == 'not_going' %>
+      <i class="text-danger fas fa-times mx-3"></i>
+    <% else %>
+      <i class="fas fa-times mx-3"></i>
+    <% end %>
+  <% end %>
+</div>

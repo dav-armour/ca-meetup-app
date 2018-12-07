@@ -74,14 +74,33 @@ class GroupsController < ApplicationController
         @events.each do |event|
           new_event = Event.new
           new_event.group_id = @group.id
+          new_event.meetup_id = event['id']
           new_event.name = event['name']
           new_event.date = Time.at(event['time']/1000).to_datetime
           new_event.description = event['description']
           new_event.last_updated = Time.at(event['updated']/1000).to_datetime
-          new_event.save
+          unless new_event.save
+            raise "couldn't create event"
+          end
+          if event['venue']
+            create_venue(event['venue'], new_event.id)
+          end
         end
       else
         raise 'no events found'
+      end
+    end
+
+    def create_venue(venue_details, event_id)
+      new_venue = Venue.new
+      new_venue.event_id = event_id
+      new_venue.name = venue_details['name']
+      new_venue.lat = venue_details['lat']
+      new_venue.lon = venue_details['lon']
+      new_venue.address = venue_details['address_1']
+      new_venue.city = venue_details['city']
+      unless new_venue.save
+        raise "couldn't create venue"
       end
     end
 end

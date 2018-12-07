@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_28_114209) do
+ActiveRecord::Schema.define(version: 2018_12_07_095840) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,9 +18,10 @@ ActiveRecord::Schema.define(version: 2018_10_28_114209) do
   create_table "event_users", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "event_id"
-    t.boolean "attending"
+    t.integer "attending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_id", "user_id"], name: "by_event_and_user", unique: true
     t.index ["event_id"], name: "index_event_users_on_event_id"
     t.index ["user_id"], name: "index_event_users_on_user_id"
   end
@@ -34,6 +35,7 @@ ActiveRecord::Schema.define(version: 2018_10_28_114209) do
     t.bigint "group_id"
     t.text "description"
     t.datetime "last_updated"
+    t.string "meetup_id"
     t.index ["group_id"], name: "index_events_on_group_id"
   end
 
@@ -74,7 +76,22 @@ ActiveRecord::Schema.define(version: 2018_10_28_114209) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "venues", force: :cascade do |t|
+    t.bigint "event_id"
+    t.string "name"
+    t.float "lat"
+    t.float "lon"
+    t.string "address"
+    t.string "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_venues_on_event_id"
+  end
+
+  add_foreign_key "event_users", "events"
+  add_foreign_key "event_users", "users"
   add_foreign_key "events", "groups"
   add_foreign_key "ratings", "events"
   add_foreign_key "ratings", "users"
+  add_foreign_key "venues", "events"
 end
