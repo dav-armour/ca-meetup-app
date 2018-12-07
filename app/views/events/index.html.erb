@@ -12,7 +12,7 @@
 
       <% events.each do |event| %>
         <div class="<%= event.html_class %>">
-          <%= link_to event.name, event %>
+          <%= link_to event.name, events_path(event_id: event.id) %>
         </div>
       <% end %>
     <% end %>

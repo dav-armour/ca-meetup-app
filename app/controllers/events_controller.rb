@@ -21,7 +21,7 @@ class EventsController < ApplicationController
     if params['event_id']
       @selected_event = Event.find_by(id: params['event_id'])
     end
-    @selected_event ||= Event.last
+    @selected_event ||= Event.where("date >= ?", Date.today).order('date ASC').first
     event_user = EventUser.find_by(user_id: current_user.id, event_id: @selected_event.id)
     @attending = event_user ? event_user.attending : nil
   end
@@ -31,9 +31,14 @@ class EventsController < ApplicationController
   def show
     # @event_details = MeetupService.event(@event.group.urlname, @event.meetup_id)
     @event_details = {}
-    @ratings = { food: 0, drinks: 0, talks: 0, vibe: 0 }
     event_user = EventUser.find_by(user_id: current_user.id, event_id: @event.id)
     @attending = event_user ? event_user.attending : nil
+    @hive_attending = @event.users_attending
+    @hive_unavailable = @event.users_unavailable
+    @event_ids = Event.where(group_id: @event.group_id).pluck(:id)
+    rating_values = Rating.where(event_id: @event_ids).pluck('avg(food)', 'avg(drinks)', 'avg(talks)', 'avg(vibe)')[0].map(&:to_i)
+    @ratings = { food: rating_values[0], drinks: rating_values[1], talks: rating_values[2], vibe: rating_values[3] }
+    # @ratings = { food: 0, drinks: 0, talks: 0, vibe: 0 }
   end
 
   def new

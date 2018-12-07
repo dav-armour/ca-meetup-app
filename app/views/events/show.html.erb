@@ -1,3 +1,5 @@
+<%= @rating_values %>
+
 <h2 class="text-center mb-4"><%= @event.name %></h2>
 
 <div class="row mb-4">
@@ -69,7 +71,8 @@
           map = new google.maps.Map(document.getElementById('map'), {
             center: coords,
             zoom: 15,
-            mapTypeControl: false
+            mapTypeControl: false,
+            streetViewControl: false
           });
           var marker = new google.maps.Marker({
             position: coords,
@@ -96,3 +99,13 @@
 
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
+
+<hr />
+
+<div>
+  <h3>Hive Attending (<%= @hive_attending.count %>)</h3>
+  <% @hive_attending.each do |user| %>
+    <p><%= user.name %></p>
+  <% end %>
+  <span>Can't Go (<%= @hive_unavailable.count %>)</span>
+</div>
