@@ -104,17 +104,18 @@
 
 <div>
   <h3>Hive Attending (<%= @hive_attending.count %>)</h3>
-  <% @hive_attending.each do |user| %>
-    <div class="row">
-      <div class="user-thumb">
+  <!--<span class="ml-3 font-weight-light">Can't Go (<%= @hive_unavailable.count %>)</span> %>-->
+  <div class="d-flex flex-wrap my-3">
+    <% @hive_attending.each do |user| %>
+      <div class="user-details col-3 px-0">
         <% unless user.profile_image? %>
           <%= image_tag asset_path("fallback/defaultavatar.jpg"), class: "profile-pic", alt: "blank profile picture"%>
         <% else %>
           <%= image_tag user.profile_image.thumb.url, class:"profile-pic", alt: "profile picture" %>
         <% end %>
+        <span class="mx-2"><%= user.name %></span>
       </div>
-      <p><%= user.name %></p>
-    </div>
-  <% end %>
-  <span>Can't Go (<%= @hive_unavailable.count %>)</span>
+    <% end %>
+  </div>
+
 </div>
