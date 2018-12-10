@@ -18,6 +18,18 @@
 //= require popper
 //= require bootstrap-sprockets
 
+var readURL = function(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      $('.profile-pic').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
 var ready = function() {
   $("#hamburger").on('click', function(){
     console.log("Clicked")
@@ -28,6 +40,16 @@ var ready = function() {
   $("#nav-list a").on('click', function(event) {
     $("#nav-list").removeClass('open');
     $("#hamburger").removeClass('open');
+  });
+
+  // Used for profile image loading
+  $(".file-upload").on('change', function(){
+    readURL(this);
+  });
+
+  // Used for activating file input when label is clicked
+  $(".upload-button, #plus-icon").on('click', function() {
+      $(".file-upload").click();
   });
 
   $("#changePass").click(function(){

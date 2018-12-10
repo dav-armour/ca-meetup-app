@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :events, -> { where event_users: { attending: 'going' } }, through: :event_users
   # has_many :events, through: :event_users, -> { where(groups: {active: true}) }
 
+  # Carrierwave config
+  mount_uploader :profile_image, AvatarUploader
+
   def first_name
     self.name.split.first
   end

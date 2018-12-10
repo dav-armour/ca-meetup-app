@@ -7,6 +7,17 @@
       <%= devise_error_messages! %>
 
       <div class="form-group">
+        <%= f.label :profile_image, class: "sr-only" %>
+        <div class="avatar-wrapper rounded-circle">
+          <%= image_tag asset_path("fallback/defaultavatar.jpg"), class:"profile-pic" %>
+          <div class="upload-button">
+          </div>
+          <%= f.file_field :profile_image, class: "file-upload" %>
+        </div>
+          <div class="d-flex justify-content-center height-0"><span id="plus-icon" class="text-success border-success"></span></div>
+      </div>
+
+      <div class="form-group">
         <%= f.label :email %>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
