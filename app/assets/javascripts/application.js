@@ -55,12 +55,25 @@ var ready = function() {
   $("#changePass").click(function(){
     $(".new-pass-input").attr("disabled",!this.checked);
   });
+
+  $('.groups-style input[type="color"]').on('change', function() {
+    var textColour = $('#group_text_colour').val();
+    var backgroundColour = $('#group_background_colour').val();
+    $('#group-style-preview').css("color", textColour);
+    $('#group-style-preview').css("background-color", backgroundColour);
+  });
+
+  $("#group_short_name").on("input", function() {
+    var input = $(this);
+    var val = input.val();
+
+    if (input.data("lastval") != val) {
+      input.data("lastval", val);
+      $('#group-style-preview').text(val);
+    }
+  });
 };
 
 // Make it work for page reloads and links
-
-$(function() {
-  ready;
-});
 
 $(document).on('turbolinks:load', ready);

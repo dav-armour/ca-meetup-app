@@ -16,7 +16,7 @@
 
     <div class="form-group">
       <%= form.label :short_name %>
-      <%= form.text_field :short_name, class: "form-control", required: true %>
+      <%= form.text_field :short_name, class: "form-control", required: true, maxlength: 10 %>
     </div>
 
     <div class="form-group">
@@ -38,7 +38,7 @@
     </div>
 
     <h3>Preview</h3>
-    <div class="group-style-preview mx-auto my-3" style="background-color: <%= @group.background_colour %>; color: <%= @group.text_colour %>;"><%= @group.short_name %></div>
+    <div id="group-style-preview" class="mx-auto my-3" style="background-color: <%= @group.background_colour %>; color: <%= @group.text_colour %>;"><%= @group.short_name %></div>
 
     <div class="form-group">
       <%= form.submit 'Submit', class: "btn btn-success form-control" %>
