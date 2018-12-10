@@ -26,6 +26,4 @@
 
 <%= link_to 'Delete Group', @group, class: "btn btn-sm btn-danger d-inline-block my-1", method: :delete, data: { confirm: 'Are you sure?' } %>
 
-<hr />
-
-<%= link_to 'Show All Groups', groups_path %>
+<%= link_to 'Change Calendar Styling', group_style_path(@group), class: "btn btn-sm btn-success d-inline-block my-1" %>

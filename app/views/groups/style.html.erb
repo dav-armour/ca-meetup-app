@@ -1,0 +1,47 @@
+<h2 class="my-3 text-center">Add Calendar Styling</h2>
+
+<div class="w-25 mx-auto text-center">
+  <%= form_with(model: @group, url: group_style_path(@group.id), local: true) do |form| %>
+    <% if @group.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@group.errors.count, "error") %> prohibited this group from being saved:</h2>
+
+        <ul>
+        <% group.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :short_name %>
+      <%= form.text_field :short_name, class: "form-control", required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :background_colour %>
+      <% if @group.background_colour %>
+        <%= form.color_field :background_colour, class: "form-control", required: true %>
+      <% else %>
+        <%= form.color_field :background_colour, value: "#FF0000", class: "form-control", required: true %>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :text_colour %>
+      <% if @group.text_colour %>
+        <%= form.color_field :text_colour, class: "form-control", required: true %>
+      <% else %>
+        <%= form.color_field :text_colour, value: "#FFFFFF", class: "form-control", required: true %>
+      <% end %>
+    </div>
+
+    <h3>Preview</h3>
+    <div class="group-style-preview mx-auto my-3" style="background-color: <%= @group.background_colour %>; color: <%= @group.text_colour %>;"><%= @group.short_name %></div>
+
+    <div class="form-group">
+      <%= form.submit 'Submit', class: "btn btn-success form-control" %>
+    </div>
+  <% end %>
+</div>

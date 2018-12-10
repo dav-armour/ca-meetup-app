@@ -11,8 +11,9 @@
       <%= date.day %>
 
       <% events.each do |event| %>
-        <div class="<%= event.html_class %>">
-          <%= link_to event.name, events_path(event_id: event.id) %>
+        <div class="p-1"
+          style="background-color: <%= event.group.background_colour %>;">
+          <%= link_to event.group.short_name, events_path(event_id: event.id), style: "color: #{event.group.text_colour}" %>
         </div>
       <% end %>
     <% end %>

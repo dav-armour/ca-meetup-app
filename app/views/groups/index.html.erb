@@ -1,5 +1,7 @@
-<h1>Groups</h1>
-
+<div class="d-flex justify-content-between">
+  <h1>Groups</h1>
+  <%= link_to 'Add New Group', new_group_path, class: "btn btn-sm btn-success my-auto" %>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -14,19 +16,16 @@
   <tbody>
     <% @groups.each do |group| %>
       <tr>
-        <td class="align-middle"><%= group.name %></td>
+        <td class="align-middle">
+          <%= link_to group.name, group %>
+        </td>
         <td class="align-middle"><%= group.location %></td>
         <td class="d-none d-md-table-cell align-middle"><%= strip_tags(group.description).truncate(45, separator: ' ') %></td>
         <td class="d-none d-lg-table-cell align-middle"><%= link_to "Meetup Link", group.link %></td>
         <td class="align-middle">
-          <%= link_to 'Show', group, class: "btn btn-sm btn-primary d-inline-block my-1" %>
           <%= link_to 'Destroy', group, class: "btn btn-sm btn-danger d-inline-block my-1", method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Group', new_group_path %>

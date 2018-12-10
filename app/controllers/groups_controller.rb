@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :update, :destroy]
+  before_action :set_group, only: [:show, :style, :update_style, :update, :destroy]
 
   def search
     @results = MeetupService.groups(params[:search_text], params[:location])
@@ -22,14 +22,27 @@ class GroupsController < ApplicationController
   def new
   end
 
+  def style
+  end
+
+  def update_style
+    if @group.update(style_params)
+      redirect_to @group, notice: 'Style succesfully added.'
+    else
+      render :style
+    end
+  end
+
   # POST /groups
   # POST /groups.json
   def create
     # byebug
     @group = Group.new(group_params)
+    @group.short_name = @group.name.slice(0,7) + '...'
 
     if @group.save
-      redirect_to @group, notice: 'Group was successfully created.'
+      redirect_to group_style_path(@group.id), notice: 'Group was successfully created.'
+      # redirect_to @group, notice: 'Group was successfully created.'
       generate_events(@group.urlname)
     else
       redirect_to groups_path, alert: 'Group already exists.'
@@ -65,7 +78,11 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:name, :urlname, :description, :location, :link)
+      params.require(:group).permit(:name, :urlname, :description, :location, :link, :background_colour, :text_colour, :short_name)
+    end
+
+    def style_params
+      params.require(:group).permit(:background_colour, :text_colour, :short_name)
     end
 
     def generate_events(urlname)
