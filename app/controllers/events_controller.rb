@@ -29,8 +29,8 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    # @event_details = MeetupService.event(@event.group.urlname, @event.meetup_id)
-    @event_details = {}
+    @event_details = MeetupService.event(@event.group.urlname, @event.meetup_id)
+    # @event_details = {}
     event_user = EventUser.find_by(user_id: current_user.id, event_id: @event.id)
     @attending = event_user ? event_user.attending : nil
     @hive_attending = @event.users_attending

@@ -8,17 +8,25 @@
     <div class="card-header text-center">
       <h2>Your Last Event</h2>
     </div>
-    <h2 class="card-title text-center mb-0 mt-3"><%= @last_event.name %></h5>
-    <div class="card-body">
-      <p class="card-text mb-1">Date: <%= @last_event.date.strftime("%d/%m/%Y") %></p>
-      <h4>Please Rate:</h4>
-      <%= render 'shared/rating_stars', ratings: @ratings, event: @last_event %>
-      <%= link_to "More Details", event_path(@last_event), class: "mb-1" %>
-      <div class="add-buttons mt-2 d-flex justify-content-around">
-        <%= link_to "Add Photo", root_path, class: "btn btn-primary" %>
-        <%= link_to "Add Comment", root_path, class: "btn btn-primary" %>
+    <% if @last_event %>
+      <h2 class="card-title text-center mb-0 mt-3"><%= @last_event.group.short_name %></h5>
+      <div class="card-body">
+        <p class="card-text mb-1">Date: <%= @last_event.date.strftime("%d/%m/%Y") %></p>
+        <h4>Please Rate:</h4>
+        <%= render 'shared/rating_stars', ratings: @ratings, event: @last_event %>
+        <%= link_to "More Details", event_path(@last_event), class: "mb-1" %>
+        <div class="add-buttons mt-2 d-flex justify-content-around">
+          <%= link_to "Add Photo", root_path, class: "btn btn-primary" %>
+          <%= link_to "Add Comment", root_path, class: "btn btn-primary" %>
+        </div>
       </div>
-    </div>
+    <% else %>
+      <h2 class="card-title text-center mb-0 mt-3">No Event</h5>
+      <div class="card-body">
+        <p class="card-text mb-1">You don't have any previous events.</p>
+        <p class="card-text mb-1">Please choose an event from the calendar</p>
+      </div>
+    <% end %>
   </div>
 </div>
 

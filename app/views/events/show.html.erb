@@ -47,8 +47,8 @@
     </div>
     <div class="row">
       <div class="d-none d-md-block col my-4">
-          <%= render 'shared/attending_buttons', event: @event, attending: @attending %>
-        </div>
+        <%= render 'shared/attending_buttons', event: @event, attending: @attending %>
+      </div>
     </div>
   </div>
 
@@ -89,16 +89,19 @@
 
 <hr />
 
-
 <div class="event-description">
   <p>
     <strong>Description:</strong>
-    <%= @event.description.html_safe %>
+  </p>
+  <p>
+    <a href="<%= @event.group.link %>">Meetup Link</a>
+  </p>
+  <%= @event.description.html_safe %>
+  <p>
+    <strong>Link:</strong>
+    <a href="<%= @event.group.link %>"><%= @event.group.link %></a>
   </p>
 </div>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
 
 <hr />
 

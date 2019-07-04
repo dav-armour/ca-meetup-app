@@ -8,8 +8,10 @@ class PagesController < ApplicationController
     @events = Event.all
     # @next_event = @events.last
     @next_event = current_user.events.where("date >= ?", Date.today).order('date ASC').first
-    @last_event = @events.first
-    found_rating = Rating.find_by(user_id: current_user.id, event_id: @last_event.id)
+    @last_event = current_user.events.where("date <= ?", Date.today).order('date DESC').first
+    if @last_event
+      found_rating = Rating.find_by(user_id: current_user.id, event_id: @last_event.id)
+    end
     if found_rating
       @ratings = found_rating.to_hash
     else
